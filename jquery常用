@@ -64,6 +64,9 @@ find(); 匹配当前元素所有后代元素
 parent(); 匹配当前父元素
 siblings();匹配当前元素的所有兄弟同级元素
 
-冒泡事件:
+
 event.stopPropagation(); 阻止事件冒泡行为;
 event.preventDefault(); 阻止网页默认行为
+
+jquery遍历方法each :::
+each(function(index,item){}) 参数需要一个函数首地址 默认index是元素下标,item是dom对象
