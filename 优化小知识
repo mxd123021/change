@@ -1,0 +1,67 @@
+防盗链::
+判断referer信息是否来自本站 如果不是则重写
+
+mysql引擎区别::myisam
+myisam插入大量数据时效率更佳
+myisam引擎没有事务
+myisam引擎存储的文件有3个 ①表文件②索引文件③数据文件
+myisam引擎主键存储的是物理地址
+myisam引擎的索引是存储字段本身 以及主键的地址
+
+::innodb引擎
+innodb会对主键进行排序,如果是大量数据插入效率不高
+innodb有事务,适合电商业务
+innodb引擎存储的文件有2个  ①表文件②数据和索引的ibdata文件
+innodb引擎主键存储的是该行的所有字段信息
+innodb引擎的索引是存储字段本身 以及主键的id值
+
+mysql锁::
+lock table tableName read; 读锁  只能读,无法写
+lock talbe tableName write; 写锁 当前客户端才能进行读写,其他客户端阻塞状态
+unlock tables ; 解锁
+
+mysql 数据碎片处理:::
+在长期的数据更改过程中，索引文件和数据文件，都将产生空洞，形成碎片。
+方案①:
+alter table tableName engine 原来的表引擎; 完成该操作即可
+方案②:
+optimize table tableName ;
+
+mysql慢语句查询::
+my.ini添加参数
+↓↓↓
+log-slow-queries='man-log'  慢语句写入该文件 默认是在mysql的data目录下
+long_query_time=0.5      自定义执行时间0.5秒以上=慢语句 
+
+mysql语句执行时间查询::
+set profiling =1 ; 当sql语句执行时间大于1秒时匹配
+show profiles ;  查看当前客户端满足条件的语句和执行时间
+
+
+优化:::
+(1)apache配置文件开启 deflate模块
+在虚拟主机里面添加如下的配置
+<ifmodule mod_deflate.c> 
+DeflateCompressionLevel  6       #压缩级别为6，可选1-9，推荐为6 
+AddOutputFilterByType DEFLATE  text/plain #压缩文本文件 
+AddOutputFilterByType DEFLATE  text/html #压缩html文件 
+AddOutputFilterByType DEFLATE  text/xml #压缩xml文件
+</ifmodule> 
+
+(2)静态和伪静态
+SEO优化
+URL重写
+apache配置文件开启重写模块
+http常见状态码::
+
+
+200: OK, 请求成功, 服务器已经正确处理完毕
+302: Found, 当前请求的URL(文件)已经转移
+303: See Other, 当前请求的文件被转移
+304: Not Modified, 服务器没有修改, 浏览器访问本地缓存(if-modified-since)
+400: Bad Request,错误的请求
+403: Forbidden,没有访问权限
+404: Not Found, 请求的脚本不存在
+502: Bad Gateway, 网关错误, 服务器需要从其他服务器获取结果: 没有获取到
+
+
