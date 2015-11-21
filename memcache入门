@@ -1,0 +1,29 @@
+memcache:::
+安装::
+cmd -> memcache -d instal -p 端口号 默认是11211 -m 缓存的大小 默认8m  默认所有ip都可访问memcache
+卸载::
+先停止memcache服务 services.msc   cmd-> memcache -d uninstall
+
+
+安全性问题 :::安装memcache的时候有一个 -l 参数,指定该ip才可以进行连接memcache操作
+memcache一旦关机,那么内存中的数据就会丢失
+实践::
+把扩展文件放到php/ext目录里   在php.ini开启扩展	 extension=扩展文件  路径相对/ext
+设置session录入memcache
+ini_set('session.save_hanlder','memcache');设置session的存储方式
+ini_set('session.save_path','tcp://localhost:prot');设置session的存储路径
+
+memcache:::分布式存储
+new Memcache->connect('host','port');->addServer();多台memcache服务器对应多个addServer()
+
+get('键名');
+set('键名','键值',加密方式,过期时间); 如果存储的是数组或者对象,那么会自动序列化,设置的过期时间不能大于30天,大于30天需使用时间戳进行设置
+flush();清空缓存数据
+如果数据总量超出限定的范围,那么会自动清空最近最少使用的数据
+缓存多个数据时,缓存时间最好不要设置成一致,不然过期可能会导致数据库压力过大
+
+TP框架里的memcache:::
+S(array('type' => 'memcache','host' => 'ip','port' => '端口号'))初始化;
+S('key'); => $mem -> get('key'); 
+S('key','value',3600); => $mem -> set('key,'value',0,3600);
+S('key',null); 清空数据
