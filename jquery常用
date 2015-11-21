@@ -1,0 +1,69 @@
+事件绑定:
+
+bind() 参数一:绑定一个事件,不需要on前缀,参数二:触发的函数
+one() 同上 ,但是此事件只会触发一次
+unbind()  删除事件方法;参数一:事件对象,[参数二:事件]   
+
+特效::
+
+hide() 隐藏
+show()显示
+toggle()切换 
+hover()鼠标悬浮 鼠标移出事件集成
+slideUp() 向上收起,参数是毫秒
+slideDown()向下展开,参数是毫秒
+slideToggle() 如果收起就展开,如果展开就收起
+fadeIn() 淡出效果,参数毫秒,缓慢淡出
+fadeOut() 淡入效果 同上
+fadeTo() 自定义淡出或淡入,第一个参数是毫秒,第二个参数是透明度,0表示全透明,1表示不透明 取中间值半透明
+
+animate() 自定义收起展开功能,需要一个json格式参数和毫秒
+
+
+内插入:
+append(content) 在元素尾部插入指定内容
+frepend(content) 在元素头部插入指定内容
+appendTo() 在元素尾部插入匹配到的内容
+frepend()在元素头部插入匹配到的内容
+
+外插入:
+after() 在元素尾部插入指定内容
+before() 在元素头部插入指定内容
+insertAfter() 在元素尾部插入匹配到的内容
+insertbefore() 在元素头部插入匹配到的内容
+
+
+复制:
+clone([true])  复制指定元素; 有参数代表事件也复制,可省略
+
+删除:
+empty()  : 删除元素文本内容
+removeInner() :删除元素本身
+
+替换/修改:
+html() :修改元素下的所有内容
+replaceWith() : 替换元素
+
+元素包裹:
+warp() 对匹配的所有元素进行单独包裹
+warpall() 对匹配的所有元素进行一次包裹,
+warpInner() 对匹配的所有元素的文本内容进行包裹
+
+jquery扩充方法:
+$.fn.extend({fn1:function(){}}) 参数:要求是json数据格式
+
+查找方法:
+
+next();  匹配当前元素的下一个同级元素;
+prev();  匹配当前元素的上一个同级元素;
+children();匹配当前元素的所有子元素
+eq()	根据元素的索引下标进行匹配,默认从0开始
+filter(':selected'); 缩小查询范围
+not(); 匹配除not外的其他元素
+find(); 匹配当前元素所有后代元素
+parent(); 匹配当前父元素
+siblings();匹配当前元素的所有兄弟同级元素
+
+冒泡事件:
+event.stopPropagation(); 阻止事件冒泡行为;
+event.preventDefault(); 阻止网页默认行为
