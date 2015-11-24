@@ -1,0 +1,25 @@
+修改配置文件
+/etc目录下csft_mysql.conf 文件 copy一份  进行修改
+创建索引文件
+XXX\coreseek-3.2.14-win32\bin\indexer.exe -c  XXX\coreseek-3.2.14-win32\sphinx.conf mysql   //sphinx.conf是配置文件
+
+----
+加载服务
+/bin/searchd --install --config /sphinx.conf  
+
+---- 调用php接口
+/api/sphinxapi.php  copy一份放到项目根目录
+
+---- 进行调用
+demo.php
+//加载接口文件
+include 'spinxapi.php';
+//实例化
+$sph=new SphinxClient();
+//连接服务器
+$sph->Setserver('127.0.0.1',9312);
+//查找数据
+$res=$sph->query('content');
+
+//返回查找到的记录行id信息和其他详细信息
+var_dump($res);
